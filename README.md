@@ -106,11 +106,18 @@ mysql> select * from users;
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-pool2</artifactId>
+</dependency>
 ```
-2.tk/mybatis/springboot/mapper/UserMapper.java 中 getAll 方法加注解 @Cacheable 时，redis中存在的key为：`users::SimpleKey
+2.`tk/mybatis/springboot/mapper/UserMapper.java` 中配置了 `@CacheConfig(cacheNames = "users")`，getAll 方法加注解 @Cacheable
+ 时，redis中存在的key（redis-cli 中，通过命令：`keys *` 查看）为：`users::SimpleKey
  []`；加注解 @Cacheable(value="user-key") 时，redis中存在的key为：`user-key::SimpleKey []`；加注解 @Cacheable，并添加 tk/mybatis/springboot
- /config/RedisConfig.java 时，redis中存在的key为：`users::com.sun.proxy.$Proxy105getAll`。
- 3.
-
+ /config/RedisConfig.java 时，redis中存在的key为：`users::com.sun.proxy.$Proxy105getAll`。===解释：@CacheConfig
+ ：主要用于配置该类中会用到的一些共用的缓存配置。在这里@CacheConfig(cacheNames = "users")：配置了该数据访问对象中返回的内容将存储于名为users
+ 的缓存对象中，我们也可以不使用该注解，直接通过@Cacheable配置缓存集的名字来定义。
+ 
+3.执行 tk/mybatis/springboot/mapper/UserMapperTest.java 中的 testQuery 方法，通过查看打印出的 sql 语句，来确定是否执行了数据库查询。
 
 > 参考：[Spring Boot(三)：Spring Boot 中 Redis 的使用](http://www.ityouknow.com/springboot/2016/03/06/spring-boot-redis.html)
