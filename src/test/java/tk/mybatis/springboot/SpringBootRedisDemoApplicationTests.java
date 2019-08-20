@@ -1,4 +1,4 @@
-package com.example.spring_boot_redis_demo;
+package tk.mybatis.springboot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +11,7 @@ public class SpringBootRedisDemoApplicationTests {
 
     @Test
     public void contextLoads() {
+        System.out.println("hello world");
     }
 
 }
