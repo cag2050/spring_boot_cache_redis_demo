@@ -12,8 +12,6 @@
 6. MyBatis Framework
 7. Spring Data Redis(Access+Driver)
 8. Spring Boot Actuator
-9. Spring Boot Admin(Client)
-10. Spring Boot Admin(Server)
 
 ### 步骤二：mysql 的 docker 镜像使用
 1.下载镜像：
