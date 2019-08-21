@@ -27,8 +27,7 @@ public class UserMapperTest {
     @Autowired
     private CacheManager cacheManager;
 
-//    @Autowired
-//    private Log log = LogFactory.getLog(UserMapperTest.class);
+    private Log log = LogFactory.getLog(UserMapperTest.class);
 
     @Test
     public void testInsert() throws Exception {
@@ -41,7 +40,7 @@ public class UserMapperTest {
 
     @Test
     public void testQuery() throws Exception {
-//        log.info("添加log");
+        log.info("添加log");
         System.out.println(cacheManager.getCacheNames());
         // 2次查询getAll，测试是否已经开启 mybatis 二级缓存
         List<User> users = userMapper.getAll();
